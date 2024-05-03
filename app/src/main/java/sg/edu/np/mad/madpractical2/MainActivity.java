@@ -1,15 +1,19 @@
 package sg.edu.np.mad.madpractical2;
 
+import java.util.Random;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Button btnFollow = findViewById(R.id.button01);
 
         // Set the TextViews with the User's name, description and default button message
-        tvName.setText(user.name);
+        // tvName.setText(user.name);
+        int randomInt = getIntent().getIntExtra("randInt", 0);
+        tvName.setText(String.format("MAD %s", randomInt));
         tvDescription.setText(user.description);
         btnFollow.setText("Follow");
 
@@ -41,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 if (btnFollow.getText() == "Follow"){
                     btnFollow.setText("Unfollow");
-                } else {
+                    Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_SHORT).show();
+                } else if (btnFollow.getText() == "Unfollow") {
                     btnFollow.setText("Follow");
+                    Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
